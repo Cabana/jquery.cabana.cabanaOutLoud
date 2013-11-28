@@ -8,6 +8,11 @@
 
   $.widget("cabana.cabanaOutLoud", {
     /*
+    *   set version
+    */
+    version: '0.1',
+
+    /*
      * Options to be used as defaults
      */
     options: {
