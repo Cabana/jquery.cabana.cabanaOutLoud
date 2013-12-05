@@ -1,7 +1,7 @@
 /*
  *   jquery cabanaOutLoud plugin
  *   jQuery UI Widget-factory plugin (for 1.8/9+)
- *   v0.1
+ *   v0.2
  */
 
 ;(function ($, window, document, undefined) {
@@ -10,7 +10,7 @@
     /*
     * set version
     */
-    version: '0.1',
+    version: '0.2',
 
     /*
      * Options to be used as defaults
