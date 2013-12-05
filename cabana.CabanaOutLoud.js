@@ -30,7 +30,6 @@
       trackPos: null,
       part: 0,
 
-      controlsContainerClass: 'cabanaoutloud-controls-container',
       textContainerSelector: '[data-cabanaoutloud-read-this]'
     },
 
@@ -45,7 +44,6 @@
       this._applyDataParam('pauseClass', 'col-pause-class');
       this._applyDataParam('stopClass', 'col-stop-class');
 
-      this._applyDataParam('controlsContainerClass', 'col-controls-container-class');
       this._applyDataParam('textContainerSelector', 'col-text-container-selector');
     },
 
@@ -106,7 +104,7 @@
         + "</button>"
       ].join("");
 
-      $("."+this.options.controlsContainerClass).append(markup);
+      $(this.element).append(markup);
     },
 
     /*

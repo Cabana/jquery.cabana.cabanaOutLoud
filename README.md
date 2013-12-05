@@ -17,7 +17,7 @@ Text to speech.
 - Instantiate the plugin.
 
 ```javascript
-$('[data-cabanaoutloud-read-this]').cabanaOutLoud();
+$('.div-containing-controls').cabanaOutLoud();
 ```
 
 ## Options
@@ -38,8 +38,6 @@ $('.cabanaoutloud').cabanaOutLoud({
   pauseClass: [string] // The class added to the pause button. Default is "col_pause".
 
   stopClass: [string] // The class added to the play button. Default is "col_play".
-
-  controlsContainerClass: [string] // The class of the element where the controls will be placed. Default is "cabanaoutloud-controls-container".
 
   textContainerSelector: [string] // A selector matching the element containing the text to read. Default is "[data-cabanaoutloud-read-this]".
 
@@ -62,7 +60,6 @@ Some of the options can also be set via `data-` attributes on the element. They 
 - `data-col-play-class`
 - `data-col-pause-class`
 - `data-col-stop-class`
-- `data-col-controls-container-class`
 - `data-col-text-container-selector`
 
 ## Events
