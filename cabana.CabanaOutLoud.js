@@ -10,7 +10,7 @@
     /*
     * set version
     */
-    version: '0.1',
+    version: '0.2',
 
     /*
      * Options to be used as defaults
