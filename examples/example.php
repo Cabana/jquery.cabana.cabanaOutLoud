@@ -13,10 +13,13 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.cabanaoutloud').cabanaOutLoud({
+        var loud = $('[data-cabanaoutloud-read-this]');
+
+        loud.cabanaOutLoud({
           playText: "Læs op",
           stopText: "Stop",
           pauseText: "Pause",
+          controlsContainerClass: 'controls'
         });
       });
 
@@ -24,20 +27,10 @@
   </head>
   <body>
 
-    <div class="cabanaoutloud-controls-container">
+    <div class="controls">
     </div>
 
-    <?php
-      /*
-        Issue:
-        Google do not have an API for their TTS. But theres a generated link in parser.php for the TTS mpeg-file.
-        To solve this problem, the parsed text of .cabanaoutloud needs to be seperated in an array for each comma or dot.
-        There after the array[0] will be loaded and played, and as soon as the array[0] file has stopped playing, the array[1] will be loaded and start playing.
-        When the visitor press Pause, it will only stop the file playing etc.
-      */
-    ?>
-
-    <div class="cabanaoutloud">
+    <div data-cabanaoutloud-read-this>
       <p>Her er teksten, som bliver læst op. Ja det er den!</p>
     </div>
 

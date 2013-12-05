@@ -17,11 +17,11 @@ if (isset($_GET['parse'])) {
   $page = file_get_contents($_GET['parse']);
   //$page = file_get_contents("http://www.fagbladet3f.dk/2-sektion/dit-job/10f6db2a53ea47ca9b0be7d639eff4b5-20130930-her-er-de-naeste-ti-aars-megabyggerier");
   $doc = phpQuery::newDocumentHTML($page);
-  foreach (pq("." . $_GET['container']) as $item) {
+  foreach (pq($_GET['container']) as $item) {
     $text .= trim(pq($item)->text()).".";
   }
-  if (pq(".last." . $_GET['container'])) {
-    $factbox = trim(pq(".last." . $_GET['container'])->text());
+  if (pq(".last" . $_GET['container'])) {
+    $factbox = trim(pq(".last" . $_GET['container'])->text());
   }
   //$text = trim(pq(".content.article .article")->text());
 
