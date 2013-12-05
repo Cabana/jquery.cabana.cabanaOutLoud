@@ -23,7 +23,7 @@ $('.div-containing-controls').cabanaOutLoud();
 ## Options
 
 ```javascript
-$('.cabanaoutloud').cabanaOutLoud({
+$('.div-containing-controls').cabanaOutLoud({
 
   url: [string] // The URL for the page where the text to be read this. Default is `window.location.href`.
 
