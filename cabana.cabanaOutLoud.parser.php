@@ -1,6 +1,6 @@
 <?php
 
-require_once("phpQuery-onefile.php");
+require_once("../phpQuery-onefile.php");
 
 if (isset($_GET['parse'])) {
   header("Content-type: audio/mpeg;");
