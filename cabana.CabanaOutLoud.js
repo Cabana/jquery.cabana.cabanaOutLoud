@@ -164,8 +164,7 @@
       this._hidePause();
       this._showPlay();
       this._hideStop();
-      this._pauseElem().text(this.options.pauseText).removeClass("play-icon")x;
-      console.log("stop1");
+      this._pauseElem().text(this.options.pauseText).removeClass("play-icon");
 
       this._trigger("stop", null, {
         element: this.element,
