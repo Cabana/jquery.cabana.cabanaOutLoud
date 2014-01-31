@@ -9,7 +9,7 @@
     /*
     * set version
     */
-    version: '0.3',
+    version: '0.4',
 
     /*
      * Options to be used as defaults
@@ -138,7 +138,7 @@
       if (this.options.trackPos == null) {
         this.options.trackPos = this.options.audio.currentTime;
         this.options.audio.pause();
-        this._pauseElem().text(this.options.playText);
+        this._pauseElem().text(this.options.playText).addClass("play-icon");
 
         this._trigger("pause:pause", null, {
           element: this.element,
@@ -148,7 +148,7 @@
         this.options.audio.currentTime = this.options.trackPos;
         this.options.audio.play();
         this.options.trackPos = null;
-        this._pauseElem().text(this.options.pauseText);
+        this._pauseElem().text(this.options.pauseText).removeClass("play-icon");
 
         this._trigger("pause:resume", null, {
           element: this.element,
@@ -164,7 +164,8 @@
       this._hidePause();
       this._showPlay();
       this._hideStop();
-      this._pauseElem().text(this.options.pauseText);
+      this._pauseElem().text(this.options.pauseText).removeClass("play-icon")x;
+      console.log("stop1");
 
       this._trigger("stop", null, {
         element: this.element,
