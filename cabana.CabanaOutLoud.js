@@ -185,7 +185,7 @@
 
     _continueOnEnd: function() {
       var src =
-        "/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
+        "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
         "&parse=" + this.options.url +
         "&part=" + this.options.part;
 
