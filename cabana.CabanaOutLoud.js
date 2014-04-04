@@ -1,6 +1,7 @@
 /*
  *   jquery cabanaOutLoud plugin
  *   jQuery UI Widget-factory plugin (for 1.8/9+)
+ *   v 1.0
  */
 
 ;(function ($, window, document, undefined) {
@@ -160,6 +161,7 @@
     stop: function() {
       this.options.trackPos = null;
       this.options.part = 0;
+      this.options.audio.stop();
       this._continueOnEnd();
       this._hidePause();
       this._showPlay();
