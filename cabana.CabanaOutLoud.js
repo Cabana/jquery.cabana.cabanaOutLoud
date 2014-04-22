@@ -9,7 +9,7 @@
     /*
     * set version
     */
-    version: '0.4',
+    version: '0.5',
 
     /*
      * Options to be used as defaults
@@ -158,8 +158,10 @@
     },
 
     stop: function() {
+      this.options.audio.pause();
       this.options.trackPos = null;
       this.options.part = 0;
+      this.options.audio.setAttribute("src", "");
       this._continueOnEnd();
       this._hidePause();
       this._showPlay();
@@ -173,14 +175,16 @@
     },
 
     continue: function() {
-      this.options.part++;
-      this._continueOnEnd();
-      this.options.audio.play();
+      if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
+        this.options.part++;
+        this._continueOnEnd();
+        this.options.audio.play();
 
-      this._trigger("continue", null, {
-        element: this.element,
-        options: this.options
-      });
+        this._trigger("continue", null, {
+          element: this.element,
+          options: this.options
+        });
+      }
     },
 
     _continueOnEnd: function() {
