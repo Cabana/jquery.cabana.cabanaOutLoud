@@ -201,10 +201,12 @@
       this.options.audio.setAttribute("src", src);
       console.log("src changed");
 
+      var nextPart = parseInt(this.options.part)+1;
+
       var preloadsrc = 
         "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
         "&parse=" + this.options.url +
-        "&part=" + this.options.part+1;
+        "&part=" + nextPart;
 
       this.options.preload.setAttribute("src", preloadsrc);
     },
