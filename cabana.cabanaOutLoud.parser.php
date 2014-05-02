@@ -38,7 +38,7 @@ if (isset($_GET['parse'])) {
 
   //$regex = ^(/\d*\.\d*/);
 
-  $splitted = multiexplode($splitby, $text);
+  $splitted = array_slice(array_filter(multiexplode($splitby, $text)), 0);
 
   $i = 0;
 
