@@ -6,6 +6,20 @@ if (isset($_GET['parse'])) {
   header("Content-type: audio/mpeg;");
 }
 
+//$tryit = exec("runas /profile /user:admin mkdir skrdr 2>&1");
+//$tryit = exec("ffmpeg -i 2>&1");
+// $testsound = "https://translate.google.com/translate_tts?ie=UTF-8&tl=da&textlen=".strlen($splitted[$_GET['part']])."&q=".urlencode($splitted[$_GET['part']]);
+// //$tryit = exec("ffmpeg -i ".$testsound." 2>&1 | grep 'Duration'");
+// $tryit = shell_exec("ffprobe -i test.mp3 -show_format_entry duration");
+// $tryit = split("=", $tryit);
+// $duration =  floatval($tryit[1])/60;
+// $duration = number_format($duration, 2);
+// print $duration."<br />";
+// $splitduration = explode(".", $duration);
+// $minutes = explode(".", $splitduration[0]/60)[0];
+// $seconds = explode(".", $splitduration[0]/60)[1]+intval($splitduration[1]/60);
+// print $duration."<br /><br />";
+
 function multiexplode ($explodes, $string) {
   $ready = str_replace($explodes, $explodes[0], $string);
   $launch = explode($explodes[0], wordwrap($ready, 80, $explodes[0]));
@@ -73,7 +87,8 @@ if (isset($_GET['parse'])) {
   }
 
   $getsound = file_get_contents($exsound);
-  print $getsound;
+  $getsound = explode("LAME3.98.2", $getsound);
+  print $getsound[0]."LAME3.98.2".$getsound[1]."LAME3.98.2".$getsound[2];
 
 } else {
   print "Error! #887";
