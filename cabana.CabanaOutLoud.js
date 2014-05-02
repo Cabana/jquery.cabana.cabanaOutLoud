@@ -9,7 +9,7 @@
     /*
     * set version
     */
-    version: '0.5',
+    version: '0.6',
 
     /*
      * Options to be used as defaults
@@ -26,6 +26,7 @@
       pauseClass: "col_pause",
 
       audio: document.createElement("audio"),
+      preload: document.createElement("audio"),
       trackPos: null,
       part: 0,
 
@@ -83,6 +84,7 @@
       $('.'+this.options.stopClass).remove();
 
       $(this.options.audio).stop().remove();
+      $(this.options.preload).stop().remove();
     },
 
     /*
@@ -115,6 +117,7 @@
     },
 
     play: function() {
+      console.log("play");
       this._trigger("play", null, {
         element: this.element,
         options: this.options
@@ -175,6 +178,7 @@
     },
 
     continue: function() {
+      console.log("continue");
       if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
         this.options.part++;
         this._continueOnEnd();
@@ -188,12 +192,21 @@
     },
 
     _continueOnEnd: function() {
+      console.log("_continueOnEnd");
       var src =
         "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
         "&parse=" + this.options.url +
         "&part=" + this.options.part;
 
       this.options.audio.setAttribute("src", src);
+      console.log("src changed");
+
+      var preloadsrc = 
+        "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
+        "&parse=" + this.options.url +
+        "&part=" + this.options.part+1;
+
+      this.options.preload.setAttribute("src", preloadsrc);
     },
 
     _stopElem: function()  { return $('.'+this.options.stopClass);  },
