@@ -9,10 +9,6 @@ Last editor: Leo Ørsnes
 
 require_once("phpQuery-onefile.php");
 
-if (isset($_GET['parse'])) {
-  header("Content-type: audio/mpeg;");
-
-
 function multiexplode ($explodes, $string) {
   $ready = str_replace($explodes, $explodes[0], $string);
   $launch = explode($explodes[0], wordwrap($ready, 80, $explodes[0]));
@@ -22,6 +18,14 @@ function multiexplode ($explodes, $string) {
 if (isset($_GET['parse'])) {
 
   $page = file_get_contents($_GET['parse']);
+
+  if (!$page) {
+    header("Content-type: text/html;");
+    print "Error 12872";
+    exit;
+  } else {
+    header("Content-type: audio/mpeg;");
+  }
   //$page = file_get_contents("http://www.fagbladet3f.dk/2-sektion/dit-job/10f6db2a53ea47ca9b0be7d639eff4b5-20130930-her-er-de-naeste-ti-aars-megabyggerier");
   $doc = phpQuery::newDocumentHTML($page);
   foreach (pq($_GET['container']) as $item) {

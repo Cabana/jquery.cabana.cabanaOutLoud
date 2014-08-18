@@ -72,7 +72,8 @@
       $('.'+_this.options.pauseClass).click(function() { _this.pause(); });
       $('.'+_this.options.stopClass).click(function()  { _this.stop(); });
 
-      $(_this.options.audio).on('ended', function() { _this.continue(); });
+      $(_this.options.audio).on('ended', function() { _this.continue(); 
+        console.log("ended");});
     },
 
     /*
@@ -191,9 +192,12 @@
 
     _continueOnEnd: function() {
 
-      var absoluteUrl = "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php";
+      console.log("_continueOnEnd");
 
-      if (typeof(Modernizr) == undefined ) {
+      //var absoluteUrl = "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php";
+      var absoluteUrl = "../cabana.cabanaOutLoud.parser.php";
+
+      if (typeof(Modernizr) == "undefined" ) {
 
         var src =
           absoluteUrl+"?container=" + this.options.textContainerSelector +

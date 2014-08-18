@@ -8,6 +8,7 @@
     <title>CabanaOutLoud</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="http://modernizr.com/downloads/modernizr-latest.js"></script>
 
     <script type="text/javascript" src="../cabana.cabanaOutLoud.js"></script>
 
