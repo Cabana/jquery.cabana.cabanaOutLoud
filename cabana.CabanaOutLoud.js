@@ -9,7 +9,7 @@
     /*
     * set version
     */
-    version: '0.6',
+    version: '0.7',
 
     /*
      * Options to be used as defaults
@@ -117,7 +117,6 @@
     },
 
     play: function() {
-      console.log("play");
       this._trigger("play", null, {
         element: this.element,
         options: this.options
@@ -178,7 +177,6 @@
     },
 
     continue: function() {
-      console.log("continue");
       if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
         this.options.part++;
         this._continueOnEnd();
@@ -192,23 +190,44 @@
     },
 
     _continueOnEnd: function() {
-      console.log("_continueOnEnd");
-      var src =
-        "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
-        "&parse=" + this.options.url +
-        "&part=" + this.options.part;
 
-      this.options.audio.setAttribute("src", src);
-      console.log("src changed");
+      var absoluteUrl = "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php";
 
-      var nextPart = parseInt(this.options.part)+1;
+      if (typeof(Modernizr) == undefined ) {
 
-      var preloadsrc = 
-        "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php?container=" + this.options.textContainerSelector +
-        "&parse=" + this.options.url +
-        "&part=" + nextPart;
+        var src =
+          absoluteUrl+"?container=" + this.options.textContainerSelector +
+          "&parse=" + this.options.url +
+          "&part=" + this.options.part;
 
-      this.options.preload.setAttribute("src", preloadsrc);
+        this.options.audio.setAttribute("src", src);
+
+        var preloadsrc = 
+          absoluteUrl+"?container=" + this.options.textContainerSelector +
+          "&parse=" + this.options.url +
+          "&part=" + this.options.part+1;
+
+        this.options.preload.setAttribute("src", preloadsrc);
+
+      } else {
+
+        if (Modernizr.mq("(max-width: 767px)")) {
+          console.log("small enough");
+
+          var src =
+            absoluteUrl+"?container=" + this.options.textContainerSelector +
+            "&parse=" + this.options.url +
+            "&mobile=true";
+            this.options.audio.setAttribute("src", src);
+        } else {
+          var src =
+            absoluteUrl+"?container=" + this.options.textContainerSelector +
+            "&parse=" + this.options.url +
+            "&part=" + this.options.part;
+          this.options.audio.setAttribute("src", src);
+        }
+
+      }
     },
 
     _stopElem: function()  { return $('.'+this.options.stopClass);  },
