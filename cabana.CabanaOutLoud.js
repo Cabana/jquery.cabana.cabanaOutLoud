@@ -221,7 +221,7 @@
 
       console.log("_continueOnEnd");
 
-      var absoluteUrl = "http://cdn.cabana.dk/modules/col/v1/cabana.cabanaOutLoud.parser.php";
+      var absoluteUrl = "http://cdn.cabana.dk/modules/col/v1.7/cabana.cabanaOutLoud.parser.php";
       //var absoluteUrl = "../cabana.cabanaOutLoud.parser.php";
 
       if (typeof(Modernizr) == "undefined" ) {
