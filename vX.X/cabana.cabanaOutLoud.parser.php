@@ -1,13 +1,13 @@
 <?php  header("Access-Control-Allow-Origin: *");
 
 /*
-Version: 1.7
+Version: 0.7
 Last update: 18. august 2014
 Last editor: Leo Ørsnes
 */
 
 
-require_once("phpQuery-onefile.php");
+require_once("../phpQuery-onefile.php");
 
 function multiexplode ($explodes, $string) {
   $ready = str_replace($explodes, $explodes[0], $string);
@@ -19,9 +19,9 @@ if (isset($_GET['parse'])) {
 
   $page = file_get_contents($_GET['parse']);
 
-  if (!$page) {
+  if ($page === false) {
     header("Content-type: text/html;");
-    print "Error 12872";
+    print "Der opstod en fejl!<br />Fejlkode: 12872";
     exit;
   } else {
     header("Content-type: audio/mpeg;");
