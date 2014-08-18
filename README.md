@@ -33,11 +33,15 @@ $('.div-containing-controls').cabanaOutLoud({
 
   stopText: [string] // Text on the stop button. Default is "Stop".
 
+  loadingText: [string] //Text on loading mp3 (for mobile). Default is "Henter.."
+
   playClass: [string] // The class added to the play button. Default is "col_play".
 
   pauseClass: [string] // The class added to the pause button. Default is "col_pause".
 
   stopClass: [string] // The class added to the play button. Default is "col_play".
+
+  loadingClass: [string] // The class added to the loading span. Default is "col_loading"
 
   textContainerSelector: [string] // A selector matching the element containing the text to read. Default is "[data-cabanaoutloud-read-this]".
 

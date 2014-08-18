@@ -20,10 +20,12 @@
       playText: "Play",
       pauseText: "Pause",
       stopText: "Stop",
+      loadingText: "Henter..",
 
       playClass: "col_play",
       stopClass: "col_stop",
       pauseClass: "col_pause",
+      loadingClass: "col_loading",
 
       audio: document.createElement("audio"),
       preload: document.createElement("audio"),
@@ -72,8 +74,11 @@
       $('.'+_this.options.pauseClass).click(function() { _this.pause(); });
       $('.'+_this.options.stopClass).click(function()  { _this.stop(); });
 
-      $(_this.options.audio).on('ended', function() { _this.continue(); 
-        console.log("ended");});
+      $(_this.options.audio).on('ended', function() { _this.continue(); });
+
+      $(_this.options.audio).on("loadeddata", function() {
+        $("."+_this.options.loadingClass).fadeOut(200);
+      });
     },
 
     /*
@@ -96,6 +101,10 @@
           "<button type='button' class='"+this.options.playClass+"'>"
         +   this.options.playText
         + "</button> ",
+
+          "<span class='"+this.options.loadingClass+"' style='display:none;'>"
+        +   this.options.loadingText
+        + "</span>",
 
           "<button type='button' class='"+this.options.pauseClass+"'>"
         +   this.options.pauseText
@@ -165,11 +174,12 @@
       this.options.trackPos = null;
       this.options.part = 0;
       this.options.audio.setAttribute("src", "");
-      this._continueOnEnd();
+      this._continueOnEnd("stop");
       this._hidePause();
       this._showPlay();
       this._hideStop();
       this._pauseElem().text(this.options.pauseText).removeClass("play-icon");
+      $("."+this.options.loadingClass).fadeOut(200);
 
       this._trigger("stop", null, {
         element: this.element,
@@ -178,19 +188,36 @@
     },
 
     continue: function() {
-      if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
-        this.options.part++;
-        this._continueOnEnd();
-        this.options.audio.play();
+      if (typeof(Modernizr) == "undefined" ) {
+        if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
+          this.options.part++;
+          this._continueOnEnd();
+          this.options.audio.play();
 
-        this._trigger("continue", null, {
-          element: this.element,
-          options: this.options
-        });
+          this._trigger("continue", null, {
+            element: this.element,
+            options: this.options
+          });
+        }
+      } else {
+        if (Modernizr.mq("(max-width: 767px)")) {
+          this.stop();
+        } else {
+          if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
+            this.options.part++;
+            this._continueOnEnd();
+            this.options.audio.play();
+
+            this._trigger("continue", null, {
+              element: this.element,
+              options: this.options
+            });
+          }
+        }
       }
     },
 
-    _continueOnEnd: function() {
+    _continueOnEnd: function(action) {
 
       console.log("_continueOnEnd");
 
@@ -217,6 +244,10 @@
 
         if (Modernizr.mq("(max-width: 767px)")) {
           console.log("small enough");
+
+          if (action != "stop") {
+            $("."+this.options.loadingClass).fadeIn(200);
+          }
 
           var src =
             absoluteUrl+"?container=" + this.options.textContainerSelector +

@@ -29,11 +29,11 @@
     </div>
 
     <div data-cabanaoutloud-read-this>
-      En
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, ea asperiores possimus aliquid eos eum error odit ad molestias, porro officiis et aliquam dolor numquam vel voluptas eligendi ducimus. Aperiam.
     </div>
 
     <div data-cabanaoutloud-read-this>
-      To
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos accusamus nesciunt quasi facere rerum eius expedita autem incidunt tempore sequi, totam ipsum laborum perspiciatis accusantium, nisi voluptates deserunt, beatae amet.
     </div>
 
   </body>
