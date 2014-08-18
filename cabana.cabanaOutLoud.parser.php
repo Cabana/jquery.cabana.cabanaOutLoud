@@ -1,7 +1,7 @@
 <?php  header("Access-Control-Allow-Origin: *");
 
 /*
-Version: 0.7
+Version: 1.7
 Last update: 18. august 2014
 Last editor: Leo Ørsnes
 */
