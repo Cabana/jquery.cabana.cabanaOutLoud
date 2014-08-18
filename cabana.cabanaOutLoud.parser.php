@@ -1,10 +1,16 @@
 <?php  header("Access-Control-Allow-Origin: *");
 
-require_once("../phpQuery-onefile.php");
+/*
+Version: 0.7
+Last update: 18. august 2014
+Last editor: Leo Ørsnes
+*/
+
+
+require_once("phpQuery-onefile.php");
 
 if (isset($_GET['parse'])) {
   header("Content-type: audio/mpeg;");
-}
 
 
 function multiexplode ($explodes, $string) {
@@ -47,6 +53,8 @@ if (isset($_GET['parse'])) {
       $splitted[$i] = trim($splitted[$i], " ");
       $splitted[$i] = trim($splitted[$i], "\t");
       $splitted[$i] = trim($splitted[$i], "\n");
+      $splitted[$i] = str_replace("cookies", "kukis", $splitted[$i]);
+      $splitted[$i] = str_replace("Cookies", "kukis", $splitted[$i]);
     }
     $i++;
   }
@@ -69,28 +77,46 @@ if (isset($_GET['parse'])) {
     exit;
   }
 
-  if (!isset($_GET['part'])) {
+  if (!isset($_GET['part']) && $_GET['mobile'] != "true") {
     $exsound = "https://translate.google.com/translate_tts?tl=en&q=Something%20went%20wrong!";
-  } else {
+  } else if ($_GET['mobile'] != "true") {
     $exsound = "https://translate.google.com/translate_tts?ie=UTF-8&tl=da&textlen=".strlen($splitted[$_GET['part']])."&q=".urlencode($splitted[$_GET['part']]);
-  }
 
-  $silencepattern = "/^UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU*U$/";
-  $finaloutput = "";
+    $silencepattern = "/^UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU*U$/";
+    $finaloutput = "";
 
-  $getsound = file_get_contents($exsound);
-  $getsound = explode("LAME3.98.2", $getsound);
+    $getsound = file_get_contents($exsound);
+    $getsound = explode("LAME3.98.2", $getsound);
 
 
-  foreach ($getsound as $sound) {
-    if (!preg_match($silencepattern, $sound)) {
-      $finaloutput = $finaloutput.$sound;
+    foreach ($getsound as $sound) {
+      if (!preg_match($silencepattern, $sound)) {
+        $finaloutput = $finaloutput.$sound;
+      }
     }
+
+    if ($finaloutput != "") {
+      print $finaloutput;
+    }
+
+  } else {
+    $i = 0;
+
+    foreach ($splitted as $part) {
+      $collect[$i] = "https://translate.google.com/translate_tts?ie=UTF-8&tl=da&textlen=".strlen($part)."&q=".urlencode($part);
+      $sample[$i] = file_get_contents($collect[$i]);
+      $i++;
+    }
+
+
+    foreach ($sample as $s) {
+      $output = $output.$s;
+    }
+
+    print $output;
+
   }
 
-  if ($finaloutput != "") {
-    print $finaloutput;
-  }
 
 } else {
   print "Error! #887";
