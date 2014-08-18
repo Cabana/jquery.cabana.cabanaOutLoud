@@ -200,7 +200,7 @@
           });
         }
       } else {
-        if (Modernizr.mq("(max-width: 767px)")) {
+        if (Modernizr.mq("(max-width: 767px)") || Modernizr.touch) {
           this.stop();
         } else {
           if (!this._pauseElem().hasClass("play-icon") && this._stopElem().css("display") != "none" && this._playElem().css("display") == "none") {
@@ -219,7 +219,7 @@
 
     _continueOnEnd: function(action) {
 
-      console.log("_continueOnEnd");
+      
 
       var absoluteUrl = "http://cdn.cabana.dk/modules/col/v"+this.version+"/cabana.cabanaOutLoud.parser.php";
       //var absoluteUrl = "../cabana.cabanaOutLoud.parser.php";
@@ -242,8 +242,7 @@
 
       } else {
 
-        if (Modernizr.mq("(max-width: 767px)")) {
-          console.log("small enough");
+        if (Modernizr.mq("(max-width: 767px)") || Modernizr.touch) {
 
           if (action != "stop") {
             $("."+this.options.loadingClass).fadeIn(200);
