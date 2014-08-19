@@ -7,6 +7,9 @@ Last editor: Leo Ørsnes
 */
 
 
+$context = stream_context_create(array('http' => array('header'=>'Connection: close\r\n')));
+
+
 require_once("../phpQuery-onefile.php");
 
 function multiexplode ($explodes, $string) {
@@ -17,7 +20,7 @@ function multiexplode ($explodes, $string) {
 
 if (isset($_GET['parse'])) {
 
-  $page = file_get_contents($_GET['parse']);
+  $page = file_get_contents($_GET['parse'], false, $context);
 
   if ($page === false) {
     header("Content-type: text/html;");
@@ -89,7 +92,7 @@ if (isset($_GET['parse'])) {
     $silencepattern = "/^UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU*U$/";
     $finaloutput = "";
 
-    $getsound = file_get_contents($exsound);
+    $getsound = file_get_contents($exsound, false, $context);
     $getsound = explode("LAME3.98.2", $getsound);
 
 
@@ -108,7 +111,7 @@ if (isset($_GET['parse'])) {
 
     foreach ($splitted as $part) {
       $collect[$i] = "https://translate.google.com/translate_tts?ie=UTF-8&tl=da&textlen=".strlen($part)."&q=".urlencode($part);
-      $sample[$i] = file_get_contents($collect[$i]);
+      $sample[$i] = file_get_contents($collect[$i], false, $context);
       $i++;
     }
 
